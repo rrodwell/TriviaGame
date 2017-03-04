@@ -45,65 +45,53 @@ $(document).ready(function() {
     }
   ];
 
-  //Variables to count correct answers vs wrong
+
   var correctAnswer = 0;
   var wrongAnswer = 0;
 
   var questionTimer;
-  //Amount of time per question, 1:30
-  var time = 500;
+  var time = 40;
   var userPicks =[];
 
-
-  console.log(questions[1].options[0]);  
   
-  //Create start button on the DOM once screen is loaded
   function renderStartButton() {
     $("#startButton").empty();
     var button = $("<button>");
     button.addClass("btn btn-lg btn-primary");
+    button.attr("id","primary");
     button.text("Start");
     $("#startButton").append(button);
   }
 
-  function endGame(){
-      $("#startButton").empty();
-      $(".game")
-      .append("<h3> All finished!</h3>")
-      .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
-      .append("<p><strong>Wrong Answers:</strong> " + wrongAnswer + "</p>")
-  };
-
   function renderDoneButton(){
-    var doneButton = $("<button onclick='endGame()'>");
+    var doneButton = $("<button>");
     doneButton.addClass("btn btn-lg btn-danger");
+    doneButton.attr("id","danger");
     doneButton.text("Done");
+    //WHY DOES THIS NOT WORK?!?!?!?!
+    //$("#danger").on("click",stop);
     $("#startButton").append(doneButton);
   
   }
 
 
-
-  //  The run function sets an interval
-  //  that runs the decrement function once a second.
   function run() {
     questionTimer = setInterval(decrement, 1000);
   }
 
-  //  The decrement function to count down timer per question.
   function decrement() {
+    //WHY DOES THE TIME SPEED UP WITH OTHER THINGS ARE CLICKED?!?!?!?
     time--;
-    //  Show the number in the #show-number tag.
     $("#gameTimer").html("<h3>Time Remaining: " + time + " seconds</h3>");
-    //  Once number hits zero...
     if (time === 0) {
       stop();
     }
   }
 
-  //  The stop function
+
   function stop() {
     clearInterval(questionTimer);
+    $(".game").empty()
     $(".game")
       .append("<h3> Uh oh, times up!</h3>")
       .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
@@ -119,21 +107,23 @@ $(document).ready(function() {
         for (var i = 0; i < questions.length; i++) {
           $(".game").append("<h4>" +questions[i].question+"</h4>")
           for (var j = 0; j < questions[i].options.length; j++) {
+            //WHY DOES THE LABEL NOT SHOW UP!?!?!?!
              var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"' style='margin-left: 60px'>");
              inputOptions.text(questions[i].options[j]);
+             //WHY DOES THE RADIO BUTTON NOT WORK?!?!?!?!?
              $(".game").append(inputOptions);
           }
         }
   }
 
-  //On click of start button...
+  //WHY DOES THIS NOT WORK?!?!?!?!?!
+  //$("#primary").on("click", function()
    $("#startButton").on("click", function() {
       run();
       populatePage();
       renderDoneButton();
     });
 
-   
 
 
   renderStartButton();
