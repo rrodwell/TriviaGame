@@ -40,13 +40,17 @@ body {
 
 
 .game p{
-	font-size: 18px;
+	font-size: 22px;
 }
 .game h3{
 	color: #d9534f;
 }
 
-.game input{
-	font-size: 18px;
-	color: white;
+.game label{
+	font-size: 14px;
+	margin-right: 20px;
+}
+
+#completed {
+	color: #00b359;
 }

@@ -12,7 +12,7 @@ $(document).ready(function() {
     {
       question: "What is the number of the only retired jersey in Georgia Tech history?",
       options: ["19","81","5","23"],
-      answer: "19",
+      answer: " 19",
       imageUrl: "assets/images/clint.jpg",
     },
     
@@ -50,27 +50,16 @@ $(document).ready(function() {
   var wrongAnswer = 0;
 
   var questionTimer;
-  var time = 40;
+  var time = 30;
   var userPicks =[];
 
   
-  function renderStartButton() {
-    $("#startButton").empty();
-    var button = $("<button>");
-    button.addClass("btn btn-lg btn-primary");
-    button.attr("id","primary");
-    button.text("Start");
-    $("#startButton").append(button);
-  }
 
   function renderDoneButton(){
     var doneButton = $("<button>");
     doneButton.addClass("btn btn-lg btn-danger");
-    doneButton.attr("id","danger");
     doneButton.text("Done");
-    //WHY DOES THIS NOT WORK?!?!?!?!
-    //$("#danger").on("click",stop);
-    $("#gameArea").append(doneButton);
+    $("#doneButton").append(doneButton);
   
   }
 
@@ -80,22 +69,22 @@ $(document).ready(function() {
   }
 
   function decrement() {
-    //WHY DOES THE TIME SPEED UP WITH OTHER THINGS ARE CLICKED?!?!?!?
     time--;
     $("#gameTimer").html("<h3>Time Remaining: " + time + " seconds</h3>");
     if (time === 0) {
       stop();
-    }
+      score();
+      $(".game").empty()
+      $("#doneButton").empty()
+      $(".game")
+        .append("<h3> Uh oh, times up!</h3>")
+        .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
+        .append("<p><strong>Wrong Answers:</strong> " + wrongAnswer + "</p>")
+      }
   }
-
 
   function stop() {
     clearInterval(questionTimer);
-    $(".game").empty()
-    $(".game")
-      .append("<h3> Uh oh, times up!</h3>")
-      .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
-      .append("<p><strong>Wrong Answers:</strong> " + wrongAnswer + "</p>")
   }
 
   function populatePage() {
@@ -106,29 +95,59 @@ $(document).ready(function() {
         for (var i = 0; i < questions.length; i++) {
           $(".game").append("<h4>" +questions[i].question+"</h4>")
           for (var j = 0; j < questions[i].options.length; j++) {
-            //WHY DOES THE LABEL NOT SHOW UP!?!?!?!
-             var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"' style='margin-left: 60px'>");
+             var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"'>");
              var inputLabel = $('<label>')
-             inputLabel.text(questions[i].options[j]);
+             inputLabel.text(questions[i].options[j]+" ");
              inputLabel.append(inputOptions);
-             //WHY DOES THE RADIO BUTTON NOT WORK?!?!?!?!?
              $(".game").append(inputLabel);
           }
         $("#gameArea").append(game);
         }
   }
 
-  //WHY DOES THIS NOT WORK?!?!?!?!?!
-  //$("#primary").on("click", function()
-   $("#startButton").on("click", function() {
+  function score(){
+    for (var i = 0; i < questions.length; i++) {
+      var choice = $("[name=question"+i+"]").val()
+      console.log(choice);
+       /*if (questions[i].answer === choice) {
+        correctAnswer++;
+        console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
+      } else if (choice === null) {
+        wrongAnswer++;
+        console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
+      } else {
+        wrongAnswer++;
+        console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
+      }*/ 
+    }
+  }
+
+  function finishedGame(){
+    score();
+    $(".game").empty()
+    $(".game")
+      .append("<h3 id='completed'>Completed!</h3>")
+      .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
+      .append("<p><strong>Wrong Answers:</strong> " + wrongAnswer + "</p>")
+    $("#doneButton").empty()
+  }
+
+
+
+
+   $("#primaryStart").on("click", function() {
       run();
       populatePage();
       renderDoneButton();
+     
+    });
+
+   $("#doneButton").on("click", function() {
+      stop();
+      finishedGame();
     });
 
 
-
-  renderStartButton();
 
 });
 
