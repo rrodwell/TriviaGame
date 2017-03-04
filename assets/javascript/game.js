@@ -70,7 +70,7 @@ $(document).ready(function() {
     doneButton.text("Done");
     //WHY DOES THIS NOT WORK?!?!?!?!
     //$("#danger").on("click",stop);
-    $("#startButton").append(doneButton);
+    $("#gameArea").append(doneButton);
   
   }
 
@@ -102,17 +102,19 @@ $(document).ready(function() {
      $("#startButton").empty();
         var game = $("<div>");
         game.addClass("game");
-        $("#startButton").append(game);
 
         for (var i = 0; i < questions.length; i++) {
           $(".game").append("<h4>" +questions[i].question+"</h4>")
           for (var j = 0; j < questions[i].options.length; j++) {
             //WHY DOES THE LABEL NOT SHOW UP!?!?!?!
              var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"' style='margin-left: 60px'>");
-             inputOptions.text(questions[i].options[j]);
+             var inputLabel = $('<label>')
+             inputLabel.text(questions[i].options[j]);
+             inputLabel.append(inputOptions);
              //WHY DOES THE RADIO BUTTON NOT WORK?!?!?!?!?
-             $(".game").append(inputOptions);
+             $(".game").append(inputLabel);
           }
+        $("#gameArea").append(game);
         }
   }
 
