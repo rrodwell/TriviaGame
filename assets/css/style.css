@@ -6,26 +6,47 @@ body {
 }
 
 .mainSection{
-	width: 600px;
-	height: 700px;
+	width: 750px;
+	min-height: 500px;
 	background: rgba(0,0,0,0.70);
 	margin-top: 30px;
 	border-radius: 10px;
 	text-align: center;
 }
 
-.mainSection h3{
+.mainSection h2{
 	font-family: 'Gloria Hallelujah', cursive;
-	font-size: 70px;
+	font-size: 60px;
 	color: white;
 	margin-bottom: 30px;
-
-}
-
-#startButton{
-	margin-top: 150px;
+	line-height: 90px;
+	margin-bottom: 50px;
 }
 
 .btn-lg{
 	width: 300px;
+}
+
+.btn-danger{
+	margin-bottom: 20px;
+}
+
+#gameTimer, .game{
+	font-family: 'Roboto', sans-serif;
+	color: #cccccc;
+	font-size: 30px;
+	margin-bottom: 30px;
+}
+
+
+.game p{
+	font-size: 18px;
+}
+.game h3{
+	color: #d9534f;
+}
+
+.game input{
+	font-size: 18px;
+	color: white;
 }

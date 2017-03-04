@@ -51,25 +51,44 @@ $(document).ready(function() {
 
   var questionTimer;
   //Amount of time per question, 1:30
-  var time = 10;
+  var time = 500;
+  var userPicks =[];
 
 
   console.log(questions[1].options[0]);  
   
   //Create start button on the DOM once screen is loaded
   function renderStartButton() {
-          $("#startButton").empty();
-          var button = $("<button>");
-          button.addClass("btn btn-lg btn-primary");
-          button.text("Start");
-          $("#startButton").append(button);
+    $("#startButton").empty();
+    var button = $("<button>");
+    button.addClass("btn btn-lg btn-primary");
+    button.text("Start");
+    $("#startButton").append(button);
+  }
+
+  function endGame(){
+      $("#startButton").empty();
+      $(".game")
+      .append("<h3> All finished!</h3>")
+      .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
+      .append("<p><strong>Wrong Answers:</strong> " + wrongAnswer + "</p>")
   };
+
+  function renderDoneButton(){
+    var doneButton = $("<button onclick='endGame()'>");
+    doneButton.addClass("btn btn-lg btn-danger");
+    doneButton.text("Done");
+    $("#startButton").append(doneButton);
+  
+  }
+
+
 
   //  The run function sets an interval
   //  that runs the decrement function once a second.
   function run() {
     questionTimer = setInterval(decrement, 1000);
-  };
+  }
 
   //  The decrement function to count down timer per question.
   function decrement() {
@@ -79,40 +98,47 @@ $(document).ready(function() {
     //  Once number hits zero...
     if (time === 0) {
       stop();
-      timeOutAnswer();
-  };
+    }
+  }
 
   //  The stop function
   function stop() {
     clearInterval(questionTimer);
-  };
+    $(".game")
+      .append("<h3> Uh oh, times up!</h3>")
+      .append("<p><strong>Correct Answers:</strong> " + correctAnswer + "</p>")
+      .append("<p><strong>Wrong Answers:</strong> " + wrongAnswer + "</p>")
+  }
 
-  //Will display the correct answer when time runs out
-  function timeOutAnswer(){
-    //show answer 
-      $(".game")
-      .html("<h3> Uh oh, times up!</h3>")
-    }
-  };
+  function populatePage() {
+     $("#startButton").empty();
+        var game = $("<div>");
+        game.addClass("game");
+        $("#startButton").append(game);
+
+        for (var i = 0; i < questions.length; i++) {
+          $(".game").append("<h4>" +questions[i].question+"</h4>")
+          for (var j = 0; j < questions[i].options.length; j++) {
+             var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"' style='margin-left: 60px'>");
+             inputOptions.text(questions[i].options[j]);
+             $(".game").append(inputOptions);
+          }
+        }
+  }
 
   //On click of start button...
    $("#startButton").on("click", function() {
-      $("#startButton").empty();
-      for (var i = 0; i < questions.length; i++) {
-        run();
-        if (time === 0){
-          $(".game").html("<p>The correct answer is: "+ questions[i].answer +"</p>")
-          $(".game").html("<img src='" + imageUrl + "'>")
-        }
-      }
-     
+      run();
+      populatePage();
+      renderDoneButton();
+    });
 
-    
-
-      //alert(questions.question1.options[0]);
-  });
+   
 
 
   renderStartButton();
 
 });
+
+
+
