@@ -50,7 +50,7 @@ $(document).ready(function() {
   var wrongAnswer = 0;
 
   var questionTimer;
-  var time = 30;
+  var time = 300;
   var userPicks =[];
 
   
@@ -93,13 +93,16 @@ $(document).ready(function() {
         game.addClass("game");
 
         for (var i = 0; i < questions.length; i++) {
-          $(".game").append("<h4>" +questions[i].question+"</h4>")
+          var questionDiv = $("<div>"); 
+          questionDiv.addClass("questionDiv"+i);
+          questionDiv.append("<h4>" +questions[i].question+"</h4>");
           for (var j = 0; j < questions[i].options.length; j++) {
-             var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"'>");
+             var inputOptions = $("<input type='radio' name='question"+i+"' value='" + questions[i].options[j]+"' id='"+questions[i].options[j]+"'>");
              var inputLabel = $('<label>')
              inputLabel.text(questions[i].options[j]+" ");
              inputLabel.append(inputOptions);
-             $(".game").append(inputLabel);
+             questionDiv.append(inputLabel);
+          game.append(questionDiv);
           }
         $("#gameArea").append(game);
         }
@@ -107,20 +110,28 @@ $(document).ready(function() {
 
   function score(){
     for (var i = 0; i < questions.length; i++) {
-      var choice = $("[name=question"+i+"]").val()
-      console.log(choice);
-       /*if (questions[i].answer === choice) {
+      userPicks.push( $( "input:checked" ).val() + " is checked!" );
+
+    };
+    console.log(userPicks);
+
+    /*
+      //var choice = $("[name=question"+i+"]").val()
+  //for(var i =0; i < questions.length; i++){
+      if (questions[i].answer === userPick[i]) {
         correctAnswer++;
         console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
-      } else if (choice === null) {
+      } else if (userPick[i] === "undefined") {
         wrongAnswer++;
         console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
       } else {
         wrongAnswer++;
         console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
-      }*/ 
-    }
+      }
+    }*/
   }
+
+
 
   function finishedGame(){
     score();
