@@ -12,7 +12,7 @@ $(document).ready(function() {
     {
       question: "What is the number of the only retired jersey in Georgia Tech history?",
       options: ["19","81","5","23"],
-      answer: " 19",
+      answer: "19",
       imageUrl: "assets/images/clint.jpg",
     },
     
@@ -50,7 +50,7 @@ $(document).ready(function() {
   var wrongAnswer = 0;
 
   var questionTimer;
-  var time = 300;
+  var time = 4  0;
   var userPicks =[];
 
   
@@ -110,25 +110,24 @@ $(document).ready(function() {
 
   function score(){
     for (var i = 0; i < questions.length; i++) {
-      userPicks.push( $( "input:checked" ).val() + " is checked!" );
+      userPicks.push( $("[name=question"+i+"]:checked").val());
 
     };
     console.log(userPicks);
 
-    /*
-      //var choice = $("[name=question"+i+"]").val()
-  //for(var i =0; i < questions.length; i++){
-      if (questions[i].answer === userPick[i]) {
+    
+    for(var i =0; i < questions.length; i++){
+      if (questions[i].answer === userPicks[i]) {
         correctAnswer++;
         console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
-      } else if (userPick[i] === "undefined") {
+      } else if (userPicks[i] === "undefined") {
         wrongAnswer++;
         console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
       } else {
         wrongAnswer++;
         console.log("Correct: " + correctAnswer + "| Wrong: " + wrongAnswer);
       }
-    }*/
+    }
   }
 
 
