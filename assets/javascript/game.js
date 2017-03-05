@@ -50,7 +50,7 @@ $(document).ready(function() {
   var wrongAnswer = 0;
 
   var questionTimer;
-  var time = 40;
+  var time = 60;
   var userPicks =[];
 
   
