@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Trivia Game</title>
+		<title>Advanced Trivia Game</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<!-- Optional theme -->
@@ -12,22 +12,25 @@
 		<!-- Latest compiled Bootstraap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Roboto" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Roboto|Bangers" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	</head>
 	<body>
-		<div class="container mainSection">
-			<div id="titleSection">
-				<h2>Georgia Tech Football Trivia!</h2>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Georgia Tech Football Trivia</h1>
+				<p>Test your knowledge of old and recent Yellow Jacket facts!</p>
+				<div id="startButton">
+					<a class="btn btn-lg btn-success" id="successStart">Start</a>
+				</div>
 			</div>
-			<div id="gameTimer"></div>
-			<div id="startButton">
-				<button class="btn btn-lg btn-primary" id="primaryStart">Start</button>
+			<div class="container mainSection">
+				<div id="gameTimer"></div>
+				<div id='gameArea'></div>
+				<div id="button"></div>
 			</div>
-			<div id='gameArea'></div>
-			<div id="doneButton"></div>
 		</div>
-							
+		
 		<!-- JavaScript -->
 		<script type="text/javascript" src="assets/javascript/app.js"></script>
 	</body>

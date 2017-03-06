@@ -50,20 +50,30 @@ $(document).ready(function() {
   var wrongAnswer = 0;
 
   var questionTimer;
-  //Amount of time per question, 1:30
-  var time = 10;
+  //Amount of time per question
+  var questionTime = 15;
+  var answerTime = 5;
 
 
   console.log(questions[1].options[0]);  
   
-  //Create start button on the DOM once screen is loaded
-  function renderStartButton() {
-          $("#startButton").empty();
-          var button = $("<button>");
-          button.addClass("btn btn-lg btn-primary");
-          button.text("Start");
-          $("#startButton").append(button);
-  };
+  //Done button to move onto next screen
+  function renderDoneButton(){
+    var doneButton = $("<button>");
+    doneButton.addClass("btn btn-lg btn-danger");
+    doneButton.text("Done");
+    $("#button").append(doneButton);
+
+  }
+
+  //Start over button to reset game
+  function renderStartOver(){
+    var startOverButton = $("<button>");
+    startOverButton.addClass("btn btn-lg btn-primary");
+    startOverButton.text("Start Over");
+    $("#button").append(doneButton);
+
+  }
 
   //  The run function sets an interval
   //  that runs the decrement function once a second.
@@ -79,7 +89,7 @@ $(document).ready(function() {
     //  Once number hits zero...
     if (time === 0) {
       stop();
-      timeOutAnswer();
+      answer();
   };
 
   //  The stop function
